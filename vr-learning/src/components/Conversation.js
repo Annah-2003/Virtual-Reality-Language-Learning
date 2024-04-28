@@ -41,7 +41,9 @@ function Conversation({ messages }) {
       </div>
       <div className="input-container">
         <input type="text" placeholder="Type your message..." />
-        <button onClick={sendMessage}>Send</button>
+        <button onClick={sendMessage} className="conversation-button">
+          Send
+        </button>
       </div>
     </div>
   );

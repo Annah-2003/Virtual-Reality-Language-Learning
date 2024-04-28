@@ -11,6 +11,49 @@
   display: flex;
   justify-content: space-between;
 }
+.Conversation {
+  background-color: #702cdd; /* Light gray background */
+  padding: 20px;
+  border-radius: 8px;
+  margin-bottom: 20px;
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.message-container {
+  margin-bottom: 10px;
+}
+
+.message {
+  margin-bottom: 5px;
+}
+
+.input-container {
+  display: flex;
+  align-items: center;
+}
+
+.input-container input {
+  flex: 1;
+  padding: 8px;
+  border-radius: 4px;
+  border: 1px solid #241212;
+  margin-right: 10px;
+}
+
+.conversation-button {
+  padding: 8px 16px;
+  background-color: #ff6b6b; /* Red */
+  color: rgb(63, 22, 66);
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.conversation-button:hover {
+  background-color: #e84343; /* Darker red on hover */
+}
+
 
 .background-image {
   background-image: url('https://i.pinimg.com/564x/d8/4e/67/d84e6702453ded4878b0e55f791e3795.jpg'); 
