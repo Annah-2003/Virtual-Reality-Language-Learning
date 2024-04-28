@@ -23,7 +23,12 @@ function Settings({ settings, onSettingsChange }) {
       <h2>Settings</h2>
       <div className="setting-item">
         <label htmlFor="language">Language:</label>
-        <input type="text" id="language" value={language} onChange={handleLanguageChange} />
+        <select id="language" value={language} onChange={handleLanguageChange}>
+          <option value="Spanish">Spanish</option>
+          <option value="French">French</option>
+          <option value="German">German</option>
+          {/* Add more languages as needed */}
+        </select>
       </div>
       <div className="setting-item">
         <label htmlFor="difficulty">Difficulty:</label>

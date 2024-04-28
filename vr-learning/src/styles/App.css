@@ -1,9 +1,11 @@
 /* App.css */
+/* App.css */
+
 .App {
   text-align: center;
-  text-decoration-color: #2c3e50;
-  
+  color: #f0f0f0; 
 }
+
 
 .container {
   display: flex;
@@ -11,7 +13,7 @@
 }
 
 .background-image {
-  background-image: url('https://i.pinimg.com/564x/d6/2a/0a/d62a0a03c70161962585cca82f6485a0.jpg'); 
+  background-image: url('https://i.pinimg.com/564x/d8/4e/67/d84e6702453ded4878b0e55f791e3795.jpg'); 
   background-size: cover;
   background-position: center;
   position: fixed;
@@ -23,11 +25,12 @@
 }
 
 .sidebar {
-  width: 70%;
+  width: 80%;
+  margin: 0 auto; /* Center the sidebar content */
 }
 
 .ProgressTracker {
-  background-color: #4CAF50;
+  background-color: #58122c; /* Change to pink */
   padding: 20px;
   border-radius: 8px;
   margin-bottom: 20px;
@@ -40,7 +43,7 @@
 }
 
 .Settings {
-  background: linear-gradient(135deg, #ff8a00, #e52e71);
+  background: linear-gradient(135deg, #2c3e50, #3498db); /* Change to gradient from dark blue to light blue */
   padding: 20px;
   border-radius: 8px;
   margin-bottom: 20px;
@@ -58,7 +61,7 @@
 
 .Settings button {
   padding: 8px 16px;
-  background-color: #ff8a00;
+  background-color: #2ecc71; /* Change to green */
   color: white;
   border: none;
   border-radius: 4px;
@@ -67,11 +70,11 @@
 }
 
 .Settings button:hover {
-  background-color: #e52e71;
+  background-color: #27ae60; /* Change hover color to darker green */
 }
 
 .MultiplayerMode {
-  background: linear-gradient(135deg, #2c3e50, #3498db);
+  background: linear-gradient(135deg, #ff8a00, #e52e71); /* Change to gradient from orange to pink */
   padding: 20px;
   border-radius: 8px;
   margin-bottom: 20px;
@@ -80,7 +83,7 @@
 
 .MultiplayerMode button {
   padding: 8px 16px;
-  background-color: #2ecc71;
+  background-color: #4CAF50; /* Change to green */
   color: white;
   border: none;
   border-radius: 4px;
@@ -89,5 +92,5 @@
 }
 
 .MultiplayerMode button:hover {
-  background-color: #27ae60;
+  background-color: #2ecc71; /* Change hover color to darker green */
 }

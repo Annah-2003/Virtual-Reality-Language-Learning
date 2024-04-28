@@ -1,5 +1,5 @@
-// App.js
 import React from 'react';
+
 import './styles/App.css'; // Import your main CSS file
 
 import VRScene from './components/VRScene';
@@ -10,15 +10,22 @@ import MultiplayerMode from './components/MultiplayerMode';
 
 function App() {
   // Placeholder data
-  const conversationMessages = [
-    { id: 1, sender: 'Virtual Character', message: 'Welcome to the virtual world! Let\'s practice some language.' },
-    { id: 2, sender: 'You', message: 'Hi, nice to meet you!' },
-    // Add more messages as needed
-  ];
+  const currentTime = new Date().getHours();
+  let conversationMessages = [];
+
+  if (currentTime < 12) {
+    conversationMessages.push({ id: 1, sender: 'Virtual Character', message: 'Good morning! Ready to start learning?' });
+  } else if (currentTime < 18) {
+    conversationMessages.push({ id: 1, sender: 'Virtual Character', message: 'Good afternoon! How is your day going?' });
+  } else {
+    conversationMessages.push({ id: 1, sender: 'Virtual Character', message: 'Good evening! Time to practice some language!' });
+  }
+
+  conversationMessages.push({ id: 2, sender: 'You', message: 'Hi, nice to meet you!' });
 
   const progressData = {
-    level: 3,
-    experience: 120,
+    level: 1,
+    experience: 0,
     // Add more progress data as needed
   };
 
@@ -39,19 +46,23 @@ function App() {
   };
 
   return (
-    <div className="App">
-      <div className="background-image"></div> {/* This div holds the background image */}
-      <h1>Virtual Reality Language Learning Game</h1>
-      <div className="container">
-        <VRScene />
-        <div className="sidebar">
-          <Conversation messages={conversationMessages} />
-          <ProgressTracker data={progressData} />
-          <Settings settings={settings} onSettingsChange={handleSettingsChange} />
-          <MultiplayerMode onJoin={handleMultiplayerJoin} />
+    <Router>
+      <div className="App">
+        <div className="background-image"></div> {/* This div holds the background image */}
+        <h1>Virtual Reality Language Learning Game</h1>
+        <div className="container">
+          <VRScene />
+          <div className="sidebar">
+            <Switch>
+              <Route exact path="/conversation" render={() => <Conversation messages={conversationMessages} />} />
+              <Route exact path="/progress" render={() => <ProgressTracker data={progressData} />} />
+              <Route exact path="/settings" render={() => <Settings settings={settings} onSettingsChange={handleSettingsChange} />} />
+              <Route exact path="/multiplayer" render={() => <MultiplayerMode onJoin={handleMultiplayerJoin} />} />
+            </Switch>
+          </div>
         </div>
       </div>
-    </div>
+    </Router>
   );
 }
 

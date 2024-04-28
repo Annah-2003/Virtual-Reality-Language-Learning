@@ -1,8 +1,34 @@
-// Conversation.js
 import React from 'react';
 
-
 function Conversation({ messages }) {
+  const sendMessage = () => {
+    const messageInput = document.querySelector('.input-container input');
+    const message = messageInput.value;
+    // Send the message to the server (e.g., db.json) using fetch or axios
+    // Example using fetch:
+    fetch('/api/messages', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ message }),
+    })
+      .then(response => response.json())
+      .then(data => {
+        // Provide a response based on the user's action
+        const wantsToLearnLanguage = window.confirm('Do you want to learn a new language?');
+        if (wantsToLearnLanguage) {
+          // Navigate to language learning page
+          window.location.href = '/learn';
+        } else {
+          // Navigate to settings or multiplayer or other page
+          // Modify the URL as needed
+          window.location.href = '/settings';
+        }
+      })
+      .catch(error => console.error('Error sending message:', error));
+  };
+
   return (
     <div className="Conversation">
       <h2>Conversation</h2>
@@ -15,7 +41,7 @@ function Conversation({ messages }) {
       </div>
       <div className="input-container">
         <input type="text" placeholder="Type your message..." />
-        <button>Send</button>
+        <button onClick={sendMessage}>Send</button>
       </div>
     </div>
   );
