@@ -1,5 +1,4 @@
-import React from 'react';
-
+import React, { useState, useEffect } from 'react';
 import './styles/App.css'; // Import your main CSS file
 
 import VRScene from './components/VRScene';
@@ -9,60 +8,59 @@ import Settings from './components/Settings';
 import MultiplayerMode from './components/MultiplayerMode';
 
 function App() {
-  // Placeholder data
-  const currentTime = new Date().getHours();
-  let conversationMessages = [];
+  // Define state variables to hold fetched data
+  const [conversationMessages, setConversationMessages] = useState([]);
+  const [progressData, setProgressData] = useState({});
+  const [settings, setSettings] = useState({});
+  const [multiplayerStatus, setMultiplayerStatus] = useState('');
 
-  if (currentTime < 12) {
-    conversationMessages.push({ id: 1, sender: 'Virtual Character', message: 'Good morning! Ready to start learning?' });
-  } else if (currentTime < 18) {
-    conversationMessages.push({ id: 1, sender: 'Virtual Character', message: 'Good afternoon! How is your day going?' });
-  } else {
-    conversationMessages.push({ id: 1, sender: 'Virtual Character', message: 'Good evening! Time to practice some language!' });
-  }
-
-  conversationMessages.push({ id: 2, sender: 'You', message: 'Hi, nice to meet you!' });
-
-  const progressData = {
-    level: 1,
-    experience: 0,
-    // Add more progress data as needed
+  // Function to fetch data from the JSON server
+  const fetchData = async () => {
+    try {
+      const response = await fetch('http://localhost:3001/');
+      const data = await response.json();
+      // Update state variables with fetched data
+      setConversationMessages(data.conversations);
+      setProgressData(data.progress);
+      setSettings(data.settings);
+      setMultiplayerStatus(data.multiplayer.status);
+    } catch (error) {
+      console.error('Error fetching data:', error);
+    }
   };
 
-  const settings = {
-    language: 'Spanish',
-    difficulty: 'Intermediate',
-    // Add more settings options as needed
-  };
+  // Call fetchData function when the component mounts
+  useEffect(() => {
+    fetchData();
+  }, []);
 
   const handleSettingsChange = (newSettings) => {
     // Handle settings change
     console.log('New settings:', newSettings);
+    // Update settings state
+    setSettings(newSettings);
   };
 
   const handleMultiplayerJoin = () => {
     // Handle joining multiplayer mode
     console.log('Joining multiplayer mode...');
+    // You can implement multiplayer join logic here
   };
 
   return (
-    <Router>
-      <div className="App">
-        <div className="background-image"></div> {/* This div holds the background image */}
-        <h1>Virtual Reality Language Learning Game</h1>
-        <div className="container">
-          <VRScene />
-          <div className="sidebar">
-            <Switch>
-              <Route exact path="/conversation" render={() => <Conversation messages={conversationMessages} />} />
-              <Route exact path="/progress" render={() => <ProgressTracker data={progressData} />} />
-              <Route exact path="/settings" render={() => <Settings settings={settings} onSettingsChange={handleSettingsChange} />} />
-              <Route exact path="/multiplayer" render={() => <MultiplayerMode onJoin={handleMultiplayerJoin} />} />
-            </Switch>
-          </div>
+    <div className="App">
+      <div className="background-image"></div> {/* This div holds the background image */}
+      <h1>Virtual Reality Language Learning Game</h1>
+      <div className="container">
+        <VRScene />
+        <div className="sidebar">
+          <Conversation messages={conversationMessages} />
+          <ProgressTracker data={progressData} />
+          <Settings settings={settings} onSettingsChange={handleSettingsChange} />
+          <MultiplayerMode onJoin={handleMultiplayerJoin} status={multiplayerStatus} />
         </div>
       </div>
-    </Router>
+    </div>
   );
 }
 
