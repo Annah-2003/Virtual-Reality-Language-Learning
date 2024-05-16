@@ -1,10 +1,11 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 
 function MultiplayerMode({ onJoin }) {
   const [players, setPlayers] = useState([]);
   const [selectedAvatar, setSelectedAvatar] = useState(null);
   const [message, setMessage] = useState('');
   const [selectedAvatars, setSelectedAvatars] = useState([]);
+  const [messageHistory, setMessageHistory] = useState([]);
 
   const avatars = [
     { id: 1, src: 'https://i.pinimg.com/564x/74/26/b4/7426b4c1421fe1b12e37b49e40ce7143.jpg' },
@@ -13,6 +14,13 @@ function MultiplayerMode({ onJoin }) {
     // Add more avatar options as needed
   ];
 
+  useEffect(() => {
+    fetch('http://localhost:3000/multiplayer')
+      .then(response => response.json())
+      .then(data => setPlayers(data.players))
+      .catch(error => console.error('Error fetching players:', error));
+  }, []);
+
   const handleJoinClick = () => {
     onJoin();
     // Add the current player to the player list with the selected avatar
@@ -20,16 +28,16 @@ function MultiplayerMode({ onJoin }) {
     setSelectedAvatars([...selectedAvatars, selectedAvatar]);
   };
 
-  const handleAvatarSelect = (avatar) => {
-    setSelectedAvatar(avatar);
+  const handleAvatarSelect = (avatarId) => {
+    setSelectedAvatar(avatarId);
     const selectedPlayer = players.length + 1;
     setMessage(`Player ${selectedPlayer} selected`);
   };
 
   const handleSendMessage = () => {
     // Implement message sending functionality
-    // For simplicity, let's just display the message in the console
-    console.log('Message sent:', message);
+    // For simplicity, let's just update the message history
+    setMessageHistory([...messageHistory, { sender: 'You', message }]);
     setMessage('');
   };
 
@@ -72,6 +80,13 @@ function MultiplayerMode({ onJoin }) {
       </div>
       <div className="chat-box">
         <h3>Chat:</h3>
+        <div className="message-history">
+          {messageHistory.map((msg, index) => (
+            <div key={index} className="message">
+              <strong>{msg.sender}:</strong> {msg.message}
+            </div>
+          ))}
+        </div>
         <input type="text" value={message} onChange={(e) => setMessage(e.target.value)} />
         <button onClick={handleSendMessage}>Send</button>
       </div>

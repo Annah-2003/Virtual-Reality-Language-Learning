@@ -1,10 +1,18 @@
-// Settings.js
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 
+function Settings({ onSettingsChange }) {
+  const [language, setLanguage] = useState('');
+  const [difficulty, setDifficulty] = useState('');
 
-function Settings({ settings, onSettingsChange }) {
-  const [language, setLanguage] = useState(settings.language);
-  const [difficulty, setDifficulty] = useState(settings.difficulty);
+  useEffect(() => {
+    fetch('http://localhost:3000/settings')
+      .then(response => response.json())
+      .then(data => {
+        setLanguage(data.settings.language);
+        setDifficulty(data.settings.difficulty);
+      })
+      .catch(error => console.error('Error fetching settings:', error));
+  }, []);
 
   const handleLanguageChange = (e) => {
     setLanguage(e.target.value);
@@ -15,7 +23,20 @@ function Settings({ settings, onSettingsChange }) {
   };
 
   const handleSaveSettings = () => {
-    onSettingsChange({ language, difficulty });
+    // Save settings data to the server
+    fetch('http://localhost:3000/settings', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({ language, difficulty })
+    })
+    .then(response => response.json())
+    .then(data => {
+      // Invoke the callback function with the updated settings
+      onSettingsChange({ language: data.language, difficulty: data.difficulty });
+    })
+    .catch(error => console.error('Error saving settings:', error));
   };
 
   return (
@@ -27,6 +48,7 @@ function Settings({ settings, onSettingsChange }) {
           <option value="Spanish">Spanish</option>
           <option value="French">French</option>
           <option value="German">German</option>
+          <option value="Italian">Italian</option>
           {/* Add more languages as needed */}
         </select>
       </div>

@@ -1,22 +1,32 @@
 /* App.css */
-/* App.css */
 
-.App {
-  text-align: center;
-  color: #f0f0f0; 
+/* Global styles */
+body {
+  margin: 0;
+  padding: 0;
+  font-family: Arial, sans-serif;
+  background-color: #0a0a0a; /* Dark background */
+  color: #f0f0f0; /* White text color */
 }
-
 
 .container {
   display: flex;
   justify-content: space-between;
 }
+
+/* Sidebar styles */
+.sidebar {
+  width: 80%;
+  margin: 0 auto;
+}
+
+/* Conversation component styles */
 .Conversation {
-  background-color: #702cdd; /* Light gray background */
+  background-color: #263238; /* Dark blue-gray background */
   padding: 20px;
   border-radius: 8px;
   margin-bottom: 20px;
-  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.4);
 }
 
 .message-container {
@@ -36,14 +46,16 @@
   flex: 1;
   padding: 8px;
   border-radius: 4px;
-  border: 1px solid #241212;
+  border: 1px solid #37474f; /* Darker blue-gray border */
   margin-right: 10px;
+  background-color: #37474f; /* Darker blue-gray background */
+  color: #f0f0f0; /* White text color */
 }
 
 .conversation-button {
   padding: 8px 16px;
-  background-color: #ff6b6b; /* Red */
-  color: rgb(63, 22, 66);
+  background-color: #ff5722; /* Orange */
+  color: #0a0a0a; /* Dark text color */
   border: none;
   border-radius: 4px;
   cursor: pointer;
@@ -51,89 +63,38 @@
 }
 
 .conversation-button:hover {
-  background-color: #e84343; /* Darker red on hover */
+  background-color: #ff7043; /* Lighter orange on hover */
 }
 
-
-.background-image {
-  background-image: url('https://i.pinimg.com/564x/d8/4e/67/d84e6702453ded4878b0e55f791e3795.jpg'); 
-  background-size: cover;
-  background-position: center;
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  z-index: -1;
-}
-
-.sidebar {
-  width: 80%;
-  margin: 0 auto; /* Center the sidebar content */
-}
-
-.ProgressTracker {
-  background-color: #58122c; /* Change to pink */
+/* VRScene component styles */
+.VRScene {
+  background-color: #0a0a0a; /* Dark background */
   padding: 20px;
   border-radius: 8px;
   margin-bottom: 20px;
-  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.4);
 }
 
-.progress-info {
-  margin-top: 10px;
-  color: white;
+.VRScene h2 {
+  color: #ff5722; /* Orange heading color */
+  margin-bottom: 15px;
 }
 
-.Settings {
-  background: linear-gradient(135deg, #2c3e50, #3498db); /* Change to gradient from dark blue to light blue */
-  padding: 20px;
-  border-radius: 8px;
-  margin-bottom: 20px;
-  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
-}
-
-.setting-item {
+.VRScene p {
+  color: #f0f0f0; /* White text color */
   margin-bottom: 10px;
 }
 
-.setting-item label {
-  margin-right: 10px;
-  color: white;
-}
-
-.Settings button {
+.VRScene button {
   padding: 8px 16px;
-  background-color: #2ecc71; /* Change to green */
-  color: white;
+  background-color: #ff5722; /* Orange */
+  color: #0a0a0a; /* Dark text color */
   border: none;
   border-radius: 4px;
   cursor: pointer;
   transition: background-color 0.3s ease;
 }
 
-.Settings button:hover {
-  background-color: #27ae60; /* Change hover color to darker green */
-}
-
-.MultiplayerMode {
-  background: linear-gradient(135deg, #ff8a00, #e52e71); /* Change to gradient from orange to pink */
-  padding: 20px;
-  border-radius: 8px;
-  margin-bottom: 20px;
-  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
-}
-
-.MultiplayerMode button {
-  padding: 8px 16px;
-  background-color: #4CAF50; /* Change to green */
-  color: white;
-  border: none;
-  border-radius: 4px;
-  cursor: pointer;
-  transition: background-color 0.3s ease;
-}
-
-.MultiplayerMode button:hover {
-  background-color: #2ecc71; /* Change hover color to darker green */
+.VRScene button:hover {
+  background-color: #ff7043; /* Lighter orange on hover */
 }
