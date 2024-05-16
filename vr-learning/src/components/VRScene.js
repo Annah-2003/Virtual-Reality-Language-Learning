@@ -14,6 +14,12 @@ function VRScene() {
     }
   };
 
+  const [showSecret, setShowSecret] = useState(false);
+
+  const toggleSecret = () => {
+    setShowSecret(!showSecret);
+  };
+
   return (
     <div className="VRScene">
       <h2>Virtual Reality Scene</h2>
@@ -35,10 +41,20 @@ function VRScene() {
         animate={{ opacity: 1, y: 0 }}
         transition={{ delay: 0.3, duration: 0.5 }}
       >
-        {/* Add dynamic content here */}
         <p>This is some dynamic content that can change based on user interaction.</p>
       </motion.div>
-      {/* Add more interactive elements, animations, and dynamic content here */}
+      {/* Additional interactive content */}
+      <motion.div
+        className="secret-container"
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ delay: 0.5, duration: 0.5 }}
+      >
+        <button onClick={toggleSecret}>Show Secret</button>
+        {showSecret && (
+          <p className="secret">🎉 You found the secret! 🎉</p>
+        )}
+      </motion.div>
     </div>
   );
 }
